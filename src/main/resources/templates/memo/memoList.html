@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>메모 목록</title>
+</head>
+<body>
+<h3>메모 목록</h3>
+
+<table>
+	<tr th:each="memo : ${memoList}">
+		<td>번호 : [[${memo.mno}]]</td>
+		<td>메모 : [[${memo.memo}]]</td>
+		<td>연락처 : [[${memo.phone}]] </td>
+		<td>
+			<span th:if="${memo.secret == 'y'}">비밀글</span>
+			<span th:unless="${memo.secret == 'y'}">공개글</span>
+
+			<form th:action="@{delete/{mno}(mno=${memo.mno})}" method="post" style="display:inline;">
+				<button type="submit">삭제</button>
+			</form>
+
+		</td>
+	</tr>
+</table>
+
+<a href="memoWrite">메모쓰기</a>
+</body>
+</html>

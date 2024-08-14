@@ -4,14 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller// 일반 컨트롤러
+@Controller //일반컨트롤러
 public class HomeController {
 
     @GetMapping("/")
     //@ResponseBody
-    public @ResponseBody String home(){
-    return "hello"; //hello.jsp
+    public String home() {
+        return "hello"; //
+    }
 }
-
-}
-

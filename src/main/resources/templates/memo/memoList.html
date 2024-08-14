@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>메모 목록</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-<h3>메모 목록</h3>
+	
+	<h3>메모 목록</h3>
+	
+		<table>
+			<tr>
+				<td>번호</td>
+				<td>메모</td>
+				<td>연락처</td>
+				<td>공개여부</td>
+			</tr>
+						
+			<tr th:each="vo : ${list}" >
+				<td>[[${vo.mno}]]</td>
+				<td>[[${vo.secret == 'y' ? '비공개입니다' : vo.memo }]]</td>
+				<td>[[${vo.phone}]]</td>
+				<td>[[${vo.secret == 'y' ? '비공개' : '공개' }]]</td>
 
-<table>
-	<tr th:each="memo : ${memoList}">
-		<td>번호 : [[${memo.mno}]]</td>
-		<td>메모 : [[${memo.memo}]]</td>
-		<td>연락처 : [[${memo.phone}]] </td>
-		<td>
-			<span th:if="${memo.secret == 'y'}">비밀글</span>
-			<span th:unless="${memo.secret == 'y'}">공개글</span>
-
-			<form th:action="@{delete/{mno}(mno=${memo.mno})}" method="post" style="display:inline;">
-				<button type="submit">삭제</button>
-			</form>
-
-		</td>
-	</tr>
-</table>
-
-<a href="memoWrite">메모쓰기</a>
+			</tr>
+			
+	</table>
+	
+	<a href="memoWrite">메모쓰기(컨트롤러 경로)</a>
 </body>
 </html>

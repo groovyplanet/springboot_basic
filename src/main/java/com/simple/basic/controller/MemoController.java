@@ -7,46 +7,63 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/memo")
 public class MemoController {
+    
+    //insert기능 - 유효성검사
+    //select기능 - 화면처리
 
     @Autowired
     @Qualifier("memoService")
     MemoService memoService;
 
+
     @GetMapping("/memoWrite")
     public String memoWrite(Model model) {
-        model.addAttribute("memo", new MemoVO()); // 빈 VO 객체를 추가하여 폼과 바인딩
+        model.addAttribute("vo", new MemoVO());
         return "memo/memoWrite";
     }
-
+    
+    //step.1 - 폼요청처리
     @PostMapping("/memoForm")
-    public String memoForm(@Valid @ModelAttribute("memo") MemoVO memo, BindingResult binding, Model model) {
-        if (binding.hasErrors()) {
-            return "memo/memoWrite";
+    public String memoForm(@Valid @ModelAttribute("vo") MemoVO vo, BindingResult binding) {
+
+        if(binding.hasErrors()) {
+            return "memo/memoWrite"; //유효성 검사 실패인 경우
         }
-        memoService.memoWrite(memo);
-        return "redirect:/memo/memoList"; // 리다이렉트하여 리스트 페이지로 이동
+
+        //insert처리................
+        memoService.insert(vo);
+
+        return "redirect:/memo/memoList"; //목록화면으로
     }
 
+    //step-2 목록화면
     @GetMapping("/memoList")
     public String memoList(Model model) {
-        // memoService에서 리스트 데이터를 가져와서 모델에 추가
-        model.addAttribute("memoList", memoService.memoList());
+
+        //select
+        ArrayList<MemoVO> list = memoService.getList();
+        model.addAttribute("list", list);
+
         return "memo/memoList";
     }
 
+    
 
-    @PostMapping("/delete/{mno}")
-    public String delete(@PathVariable("mno") Long mno) {
-        memoService.memoDelete(mno);
-        return "redirect:/memo/memoList";
-    }
+
+
+
+    
 
 
 }

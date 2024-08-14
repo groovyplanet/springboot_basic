@@ -6,38 +6,47 @@
 </head>
 <body>
 
-<h3>타임리프 내장객체 사용방법</h3>
 
-배열의 길이
-[[${#arrays.length(arr)}]]<br>
+    <h3>타임리프 내장객체 사용방법</h3>
 
-리스트의 길이
-[[${#lists.size(list)}]]<br>
+    배열의 길이
+    [[${ #arrays.length(arr) }]]
+
+    <br>
+    리스트의 길이
+    [[${ #lists.size(list) }]]
+
+    <br>
+    빈리스트 확인
+    [[${ #lists.isEmpty(list) }]]
+
+    <br>
+    [[${now}]]
+
+    <br>
+    [[${ #dates.format(now, 'yyyy-MM-dd') }]]
 
 
-빈리스트 확인
-[[${#lists.isEmpty(list)}]]<br>
-
-[[${now}]]
-<br>
-[[${#dates.format(now,'yyyy-MM-dd')}]]
 
 
-<h3>자바 스크립트로 값 받기</h3>
 
-<script th:inline="javascript">
+    <h3>자바스크립트로 값 받기</h3>
 
-    var name = '[[${name}]]';
-    var arr = `[[${arr}]]`;
-    var vo = '[[${vo}]]';
+    <script th:inline="javascript">
 
-    console.log(name);
-    console.log(arr);
-    console.log(vo);
+        var name = '[[${name}]]';
+        var arr = '[[${arr}]]';
+        var vo = '[[${vo}]]';
 
-    console.log(JSON.parse(vo));
+        console.log(name);
+        console.log(arr);
+        console.log(vo);
 
-</script>
+        console.log( JSON.parse(vo) );
+
+
+    </script>
+
 
 </body>
 </html>

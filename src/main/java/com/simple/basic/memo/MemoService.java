@@ -2,12 +2,9 @@ package com.simple.basic.memo;
 
 import com.simple.basic.command.MemoVO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface MemoService {
-
-    void memoWrite(MemoVO memo);
-    List<MemoVO> memoList();
-    void memoDelete(Long mno);
-
+    public void insert(MemoVO vo);
+    public ArrayList<MemoVO> getList();
 }

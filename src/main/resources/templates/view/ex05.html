@@ -5,17 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-<h3>인클루드 확인하기1</h3>
 
-<th:block th:replace="~{/include/layout01 :: part1 }">
-</th:block>
-<th:block th:replace="~{/include/layout01 :: part2 }">
-</th:block>
+    <h3>인클루드 확인하기1</h3>
 
-<!--파일을 통째로 인클루드-->
-<th:block th:replace="~{/include/layout02}">
+    <th:block th:replace="~{/include/layout01 :: part1 }">
+    </th:block>
 
-</th:block>
+    <th:block th:replace="~{/include/layout01 :: part2 }">
+    </th:block>
+
+    <!--파일을 통째로 인클루드-->
+    <th:block th:replace="~{/include/layout02 }">
+    </th:block>
+
 
 
 </body>
